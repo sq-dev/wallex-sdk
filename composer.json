@@ -1,0 +1,22 @@
+{
+    "name": "sq-dev/wallex-sdk",
+    "description": "Wallex.online integration sdk",
+    "type": "library",
+    "require": {
+        "guzzle/guzzle": "^3.9",
+        "php": ">=7.4"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Wallex\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "sq-dev",
+            "email": "sqmailer@gmail.com"
+        }
+    ],
+    "minimum-stability": "alpha"
+}
