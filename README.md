@@ -42,6 +42,32 @@ $url = $widget->cretePayment(
 ```
 More information about the parameters can be found in the [documentation](https://wallex.online/api_for_payments#instr-api-pop).
 
+### Feature 2: Verify payment
+
+```php
+use Wallex\Webhook;
+
+$payment = new Webhook($_POST);
+if ($payment->isVerified('secret_key') && $payment->isSuccess()) {
+    // Payment success logic
+    //F.e:
+    $client = $payment->getClient(); // Get client email
+    User::where('email', $client)
+        ->update(['balance' => $payment->getAmount()]);
+}
+``` 
+### Feature 3: Payouts
+
+```php
+use Wallex\Payout;
+
+$payout = new Payout($merchantId, $secretKey);
+
+$payout->cryptoPay($address, $amount, $currency);
+
+```
+More information about the parameters can be found in the [documentation](https://wallex.online/api_for_payments).
+
 ## Contributing
 We welcome contributions from the developer community to improve the Wallex SDK. If you are interested in contributing to the Wallex SDK, please follow the steps below:
 
