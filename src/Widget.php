@@ -2,6 +2,8 @@
 
 namespace Wallex;
 
+use Exception;
+
 class Widget
 {
     protected int $merchantId;
@@ -18,20 +20,18 @@ class Widget
     /**
      * Создание платежа
      *
-     * Описание параметров:
-     * client - email адрес клиента
-     * product - Назначение платежа или, наименование продукта
-     * price - Сумма за одну единицу
-     * quantity - Количество, если больше 1 то итоговая сумма будет quantity*price
-     * currency - Код криптовалюты для оплаты (например usdt)
-     * fiat_currency - Код фиатной валюты (rub, uah, kzt, try) для оплаты, по умолчанию - rub
-     * uuid - Уникальный номер платежа в вашей системе. Если Вы не используете идентификаторы - просто передайте в этом параметре рандомное значение
-     * language - Локаль транзакции, по умолчанию - ru
-     * message - Краткое сообщение пользователю будет отправлено на email при оплате
-     * description - Краткое описание услуги, будет отображаться в платежной форме
-     *
-     * @throws \Exception
+     * @param string $client email адрес клиента
+     * @param string $product Назначение платежа или, наименование продукта
+     * @param float $price Сумма за одну единицу товара
+     * @param int $quantity Количество, если больше 1 то итоговая сумма будет quantity*price
+     * @param string $message Краткое сообщение пользователю будет отправлено на email при оплате
+     * @param string $description Краткое описание услуги, будет отображаться в платежной форме
+     * @param string $currency Код криптовалюты для оплаты (например usdt)
+     * @param string $fiat_currency Код фиатной валюты (rub, uah, kzt, try) для оплаты, по умолчанию - rub
+     * @param string $language Локаль транзакции, по умолчанию - ru
+     * @param string|null $uuid Уникальный номер платежа в вашей системе. Если Вы не используете идентификаторы - просто передайте в этом параметре рандомное значение
      * @return string - URL для оплаты
+     * @throws Exception
      */
     public function cretePayment(
         string  $client,

@@ -18,5 +18,5 @@
             "email": "sqmailer@gmail.com"
         }
     ],
-    "minimum-stability": "alpha"
+    "minimum-stability": "beta"
 }
