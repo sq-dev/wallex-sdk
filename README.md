@@ -1,4 +1,4 @@
-# Project Name: Wallex SDK
+# Wallex SDK
 
 ## Project Overview
 The Wallex SDK is a software development kit that provides a set of tools and utilities for integrating with the Wallex payment gateway.
