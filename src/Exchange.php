@@ -60,7 +60,7 @@ class Exchange extends WallexClient
             $data['card_number'] = $cardNumber;
         }
 
-        $respond = $this->client->post('exchange/create/' . $this->merchantId, [
+        $respond = $this->client->post('exchange/create_deal' . $this->merchantId, [
             'form_params' => $data
         ]);
 
@@ -70,15 +70,16 @@ class Exchange extends WallexClient
     /**
      * Получение списка заявок на оплату
      *
+     * @param int $id ID оплаты
      * @return array
      * @throws GuzzleException
      * @throws JsonException
      */
-    public function getOffers(): array
+    public function getOffers(int $id): array
     {
         $respond = $this->client->get('exchange/offers', [
             'query' => [
-                'id' => $this->merchantId
+                'id' => $id
             ]
         ]);
 
@@ -126,7 +127,7 @@ class Exchange extends WallexClient
         int $buyId
     ): array
     {
-        $respond = $this->client->post('exchange/buy', [
+        $respond = $this->client->post('exchange/confirm', [
             'form_params' => [
                 'id' => $id,
                 'buyId' => $buyId,
@@ -187,7 +188,7 @@ class Exchange extends WallexClient
         string $cardTo = null
     ): array
     {
-        $respond = $this->client->post('exchange/buy', [
+        $respond = $this->client->post('exchange/buy_fiat', [
             'form_params' => [
                 'id' => $id,
                 'buyId' => $buyId,
@@ -207,15 +208,16 @@ class Exchange extends WallexClient
     /**
      * Получение информации по эквайрингу
      *
+     * @param int $id ID оплаты
      * @return array
      * @throws GuzzleException
      * @throws JsonException
      */
-    public function getAcquiring(): array
+    public function getAcquiring(int $id): array
     {
-        $respond = $this->client->get('exchange/offers', [
+        $respond = $this->client->get('exchange/acquiring', [
             'query' => [
-                'id' => $this->merchantId
+                'id' => $id
             ]
         ]);
 
@@ -225,15 +227,16 @@ class Exchange extends WallexClient
     /**
      * Получение информации по P2P
      *
+     * @param int $id ID оплаты
      * @return array
      * @throws GuzzleException
      * @throws JsonException
      */
-    public function getP2PInfo(): array
+    public function getP2PInfo(int $id): array
     {
         $respond = $this->client->get('exchange/get', [
             'query' => [
-                'id' => $this->merchantId
+                'id' => $id
             ]
         ]);
 
@@ -243,15 +246,16 @@ class Exchange extends WallexClient
     /**
      * Получение реквизитов для оплаты в фиате
      *
+     * @param int $id ID оплаты
      * @return array
      * @throws GuzzleException
      * @throws JsonException
      */
-    public function getPaymentCredentials(): array
+    public function getPaymentCredentials(int $id): array
     {
         $respond = $this->client->get('exchange/get_payment_credentials', [
             'query' => [
-                'id' => $this->merchantId
+                'id' => $id
             ]
         ]);
 
@@ -261,15 +265,16 @@ class Exchange extends WallexClient
     /**
      * Получение адреса для оплаты в крипте
      *
+     * @param int $id ID оплаты
      * @return array
      * @throws GuzzleException
      * @throws JsonException
      */
-    public function getCryptoAddress(): array
+    public function getCryptoAddress(int $id): array
     {
         $respond = $this->client->get('exchange/address', [
             'query' => [
-                'id' => $this->merchantId
+                'id' => $id
             ]
         ]);
 
@@ -288,7 +293,7 @@ class Exchange extends WallexClient
      */
     public function getHistory(string $wallet, DateTime $from, DateTime $to): array
     {
-        $respond = $this->client->get('exchange/address', [
+        $respond = $this->client->get('exchange/history', [
             'query' => [
                 'wallet' => $wallet,
                 'from' => $from->format('Y-m-d'),

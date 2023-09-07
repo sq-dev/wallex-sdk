@@ -1,12 +1,12 @@
 <?php
 
-use Wallex\Exchange;
 use Wallex\Models\Product;
 use Wallex\Widget;
 
 include __DIR__.'/../vendor/autoload.php';
 
-$widget = new Exchange(220, '744d8cd1-d444-4fa1-a6c9-58fe91ee6bef', 'ca92f945ba65efe9159ec14fbdaf8760');
+$widget = new Widget(1, 'secret_key');
+
 $product = new Product(
     'client@mail.ru',
     'Xiaomi 9T',
@@ -19,11 +19,6 @@ $product = new Product(
     'en'
 );
 
-try {
-    $url = $widget->getCryptoAddress();
-    print_r($url);
-}catch (\GuzzleHttp\Exception\ClientException $e){
-    echo $e->getMessage();
-}
+$url = $widget->cretePayment($product);
 
-echo "\n";
+echo $url.PHP_EOL;
